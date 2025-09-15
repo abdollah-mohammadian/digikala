@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Brand;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,6 +21,7 @@ class ProductFactory extends Factory
         return [
             'name'            => fake()->name(),
             'brand_id'        => Brand::factory(),
+            'category_id'     => Category::factory(),
             'price'           => fake()->numberBetween(100, 100000),
             'primary_image'   => null,
             'quantity'        => fake()->numberBetween(10, 100),
