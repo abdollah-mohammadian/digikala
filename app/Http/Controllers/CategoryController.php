@@ -11,7 +11,7 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::with('brands')->get();
         return CategoryResource::collection($categories);
     }
 
@@ -19,6 +19,19 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         return new CategoryResource($category->load('brands'));
+    }
+    
+
+    public function categoriesMenu()
+    {
+        $mainCategories = Category::whereNull('parent_id')
+            ->with([
+                'children.brands', 
+                'brands'           
+            ])
+            ->get();
+    
+        return CategoryResource::collection($mainCategories);
     }
 
 }

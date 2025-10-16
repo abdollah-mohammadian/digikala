@@ -19,11 +19,10 @@ class CategoryResource extends JsonResource
             'id'          => $this->id,
             'parent_id'   => $this->parent_id,
             'name'        => $this->name,
-            'description' =>$this->description,
+            'description' => $this->description,
+            'brands'      => BrandResource::collection($this->whenLoaded('brands')),
             'children'    => CategoryResource::collection($this->whenLoaded('children')),
             'parent'      => new CategoryResource($this->whenLoaded('parent')),
-            'brands'      => BrandResource::collection($this->whenLoaded('brands')),
-            'product'     => ProductResource::collection($this->whenLoaded('products'))
         ];
     }
 }
